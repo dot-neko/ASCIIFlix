@@ -1,3 +1,9 @@
+/*
+* Javier Abellan, 20 Jun 2000
+*
+* Funciones para la apertura de un socket servidor y la conexion con sus
+* clientes
+*/
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>

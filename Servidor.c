@@ -1,7 +1,14 @@
+/*
+* Javier Abellan, 20 Jun 2000
+*
+* Programa Servidor de socket INET, como ejemplo de utilizacion de las
+* funciones de sockets.
+*/
 #include <Socket_Servidor.h>
 #include <Socket.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 main ()
 {

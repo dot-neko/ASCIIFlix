@@ -1,3 +1,11 @@
+/*
+* Javier Abellan, 20 Jun 2000
+*
+* Programa Cliente de un socket INET, como ejemplo de utilizacion
+* de las funciones de sockets
+*/
+#include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <Socket_Cliente.h>
 #include <Socket.h>
