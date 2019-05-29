@@ -1,8 +1,3 @@
-/*
-* Javier Abellan, 20 Jun 2000
-*
-* Funciones de lectura y escritura en sockets
-*/
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
