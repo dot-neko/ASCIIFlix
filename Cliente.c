@@ -37,13 +37,13 @@ main ()
 	* el \0 que indica fin de cadena en C
 	*/
 	strcpy (Cadena, "Hola desde Cliente");
-	Escribe_Socket (Socket_Con_Servidor, Cadena, 5);
+	Escribe_Socket (Socket_Con_Servidor, Cadena, 68);
 
 	/*
 	* Se lee la informacion enviada por el servidor, que se supone es
 	* una cadena de 6 caracteres.
 	*/
-	Lee_Socket (Socket_Con_Servidor, Cadena, 6);
+	Lee_Socket (Socket_Con_Servidor, Cadena, 68);
 
 	/*
 	* Se escribe en pantalla la informacion recibida del servidor
