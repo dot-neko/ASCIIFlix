@@ -29,7 +29,7 @@ main ()
 		printf ("No se puede abrir socket servidor\n");
 		exit (-1);
 	}
-
+	printf ("Socket servidor abierto.\n");
 	/*
 	* Se espera un cliente que quiera conectarse
 	*/
@@ -39,7 +39,7 @@ main ()
 		printf ("No se puede abrir socket de cliente\n");
 		exit (-1);
 	}
-
+	printf ("Socket Cliente abierto.\n");
 	/*
 	* Se lee la informacion del cliente, suponiendo que va a enviar 
 	* 5 caracteres.

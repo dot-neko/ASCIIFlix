@@ -25,7 +25,7 @@ main ()
 	* estamos corriendo. Esta dado de alta en /etc/hosts
 	* "cpp_java" es un servicio dado de alta en /etc/services
 	*/
-	Socket_Con_Servidor = Abre_Conexion_Inet ("192.168.2.1", "cpp_java");
+	Socket_Con_Servidor = Abre_Conexion_Inet ("pc1", "cpp_java");
 	if (Socket_Con_Servidor == 1)
 	{
 		printf ("No puedo establecer conexion con el servidor\n");
@@ -36,7 +36,7 @@ main ()
 	* Se prepara una cadena con 5 caracteres y se envia, 4 letras mas
 	* el \0 que indica fin de cadena en C
 	*/
-	strcpy (Cadena, "Hola");
+	strcpy (Cadena, "Hola desde Cliente");
 	Escribe_Socket (Socket_Con_Servidor, Cadena, 5);
 
 	/*
