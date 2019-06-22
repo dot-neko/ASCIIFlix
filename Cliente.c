@@ -25,7 +25,7 @@ main ()
 	* estamos corriendo. Esta dado de alta en /etc/hosts
 	* "cpp_java" es un servicio dado de alta en /etc/services
 	*/
-	Socket_Con_Servidor = Abre_Conexion_Inet ("localhost", "cpp_java");
+	Socket_Con_Servidor = Abre_Conexion_Inet ("192.168.2.1", "cpp_java");
 	if (Socket_Con_Servidor == 1)
 	{
 		printf ("No puedo establecer conexion con el servidor\n");
