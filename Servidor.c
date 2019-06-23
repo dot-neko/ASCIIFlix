@@ -59,11 +59,11 @@ main ()
 	* de la cadena es 5 letras + \0 al final de la cadena = 6 caracteres
 	*/
 	strcpy (Cadena, "Adios");
-	FILE* file = fopen("/server/catalog/sw6_trailer.txt", "r");
+	FILE *file = fopen("/server/catalog/sw6_trailer.txt", "r");
     char line[68]; 		//Ancho máximo del frame
     int frameHeight = 13; 	//Altura del frame
     int frameDuration = 0;	//Duracion en segundos del frame
-    while(1){
+    while(line){
     	fgets(line, sizeof(line), file);
     	frameDuration= atoi(line);
     	for (int i = 0; i < frameHeight ; ++i)
