@@ -53,7 +53,7 @@ main ()
 			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
 		}
 		system("clear");
-	} while (Cadena!=NULL)
+	} while (Cadena!=NULL);
 
 	/*
 	* Se escribe en pantalla la informacion recibida del servidor
