@@ -70,7 +70,7 @@ main ()
     	for (int i = 0; i < frameHeight ; ++i)
 		{
 			fgets(line, sizeof(line), file);
-			sprintf(line_transf, "%s\n",line)
+			sprintf(line_transf, "%s\n",line);
 			printf("TRANSMITIENDO...\n");
 			Escribe_Socket (Socket_Cliente, line_transf, 70);
 		}
