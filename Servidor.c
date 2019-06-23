@@ -61,6 +61,7 @@ main ()
 	strcpy (Cadena, "Adios");
 	FILE *file = fopen("/server/catalog/sw6_trailer.txt", "r");
     char line[68]; 		//Ancho máximo del frame
+    char line_transf[70]; 	//Frame trasmitido
     int frameHeight = 13; 	//Altura del frame
     int frameDuration = 0;	//Duracion en segundos del frame
     while(line){
@@ -69,8 +70,9 @@ main ()
     	for (int i = 0; i < frameHeight ; ++i)
 		{
 			fgets(line, sizeof(line), file);
-			printf("%s\n", line );
-			Escribe_Socket (Socket_Cliente, line, 68);
+			sprintf(line_transf, "%s\n",line)
+			printf("TRANSMITIENDO...\n");
+			Escribe_Socket (Socket_Cliente, line_transf, 70);
 		}
 		sleep(frameDuration);
 		system("clear");

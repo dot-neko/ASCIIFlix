@@ -45,7 +45,15 @@ main ()
 	* Se lee la informacion enviada por el servidor, que se supone es
 	* una cadena de 6 caracteres.
 	*/
-	Lee_Socket (Socket_Con_Servidor, Cadena, 68);
+	
+	int frameHeight = 13;
+	do{
+		for (int i = 0; i < frameHeight; ++i)
+		{
+			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
+		}
+		system("clear");
+	} while (Cadena!=NULL)
 
 	/*
 	* Se escribe en pantalla la informacion recibida del servidor
