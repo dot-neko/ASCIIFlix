@@ -59,10 +59,10 @@ main ()
 	* de la cadena es 5 letras + \0 al final de la cadena = 6 caracteres
 	*/
 	strcpy (Cadena, "Adios");
-	FILE* file = fopen('/server/catalog/sw6_trailer.txt', "r");
+	FILE* file = fopen("/server/catalog/sw6_trailer.txt", "r");
     char line[68]; 		//Ancho máximo del frame
-    frameHeight = 13; 	//Altura del frame
-    frameDuration = 0;	//Duracion en segundos del frame
+    int frameHeight = 13; 	//Altura del frame
+    int frameDuration = 0;	//Duracion en segundos del frame
     while(!EOF){
     	fgets(line, sizeof(line), file);
     	frameDuration= atoi(line);
@@ -73,7 +73,7 @@ main ()
 			Escribe_Socket (Socket_Cliente, line, 68);
 		}
 		sleep(frameDuration);
-		clear;
+		system("clear");
     }
 	
 	Escribe_Socket (Socket_Cliente, Cadena, 68);
