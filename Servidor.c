@@ -63,7 +63,7 @@ main ()
     char line[68]; 		//Ancho máximo del frame
     int frameHeight = 13; 	//Altura del frame
     int frameDuration = 0;	//Duracion en segundos del frame
-    while(!EOF){
+    while(1){
     	fgets(line, sizeof(line), file);
     	frameDuration= atoi(line);
     	for (int i = 0; i < frameHeight ; ++i)
