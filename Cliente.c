@@ -50,6 +50,7 @@ main ()
 	do{
 		for (int i = 0; i < frameHeight; ++i)
 		{
+			printf("Leyendo del socket nro %d\n", i );
 			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
 		}
 		system("clear");
