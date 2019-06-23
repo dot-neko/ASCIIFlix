@@ -59,21 +59,32 @@ main ()
 	* de la cadena es 5 letras + \0 al final de la cadena = 6 caracteres
 	*/
 	strcpy (Cadena, "Adios");
-	FILE *file = fopen("/server/catalog/sw6_trailer.txt", "r");
-    char line[68]; 		//Ancho máximo del frame
-    char line_transf[70]; 	//Frame trasmitido
-    int frameHeight = 13; 	//Altura del frame
-    int frameDuration = 0;	//Duracion en segundos del frame
-    while(line){
-    	fgets(line, sizeof(line), file);
-    	frameDuration= atoi(line);
-    	for (int i = 0; i < frameHeight ; ++i)
+	FILE *filep;
+	if ((filep = fopen("server/catalog/sw6_trailer.txt", "r")) == NULL)
+	{
+		printf("No se pudo abrir el archivo");
+		exit(1);
+	}
+    	char line[68]; 		//Ancho máximo del frame
+    	char line_transf[70]; 	//Frame trasmitido
+    	int frameHeight = 13; 	//Altura del frame
+    	int frameDuration = 0;	//Duracion en segundos del frame
+	while(!feof(filep)){
+	    	fgets(line, 100, filep);
+		printf("lee fila 1");
+	    	frameDuration= atoi(line);
+		printf("toma frames");
+	    	for (int i = 0; i < frameHeight ; ++i)
 		{
-			fgets(line, sizeof(line), file);
-			sprintf(line_transf, "%s\n",line);
-			printf("TRANSMITIENDO...\n");
-			Escribe_Socket (Socket_Cliente, line_transf, 70);
+			if (fgets(line, 100, filep)!=NULL)
+			{
+				sprintf(line_transf, "%s\n",line);
+				printf("TRANSMITIENDO...%d\n",i);
+				Escribe_Socket (Socket_Cliente, line_transf, 70);
+			}
+		printf("Saliendo del for");
 		}
+		printf("Al sleep");
 		sleep(frameDuration);
 		system("clear");
     }
