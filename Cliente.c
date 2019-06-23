@@ -53,7 +53,7 @@ main ()
 			printf("Leyendo del socket nro %d\n", i );
 			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
 		}
-		system("clear");
+		/*system("clear");*/
 	} while (Cadena!=NULL);
 
 	/*
