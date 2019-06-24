@@ -71,7 +71,7 @@ main ()
     	int frameDuration = 0;	//Duracion en segundos del frame
 
 	while(!feof(filep)){
-		if (fgets(line, 100, filep)!=NULL)
+		if (fgets(line, 67, filep)!=NULL)
 		{
 			frameDuration= atoi(line);
 			sprintf(line_transf, "%d\n",frameDuration);
@@ -90,7 +90,7 @@ main ()
 		for (int i = 0; i < frameHeight ; ++i)
 		{
 
-			if (fgets(line, 100, filep)!=NULL)
+			if (fgets(line, 67, filep)!=NULL)
 			{
 				sprintf(line_transf, "%s\n",line);
 				Escribe_Socket (Socket_Cliente, line_transf, 70);
