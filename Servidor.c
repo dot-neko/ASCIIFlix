@@ -80,7 +80,7 @@ main ()
 		}
 		else
 		{
-			line_transf=NULL;
+			line_transf='\0';
 			Escribe_Socket (Socket_Cliente, line_transf, 70);
 			exit(1);
 		}
@@ -97,7 +97,7 @@ main ()
 			}
 			else
 			{
-				line_transf=NULL;
+				line_transf='\0';
 				Escribe_Socket (Socket_Cliente, line_transf, 70);
 				exit(1);
 			}
