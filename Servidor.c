@@ -19,7 +19,7 @@ main ()
 	*/
 	int Socket_Servidor;
 	int Socket_Cliente;
-	char Cadena[100];
+	char Cadena_lectura[100];
 
 	/*
 	* Se abre el socket servidor, con el servicio "cpp_java" dado de
@@ -41,24 +41,24 @@ main ()
 		printf ("No se puede abrir socket de cliente\n");
 		exit (-1);
 	}
-	printf ("Socket Cliente abierto.\n");
+	printf ("Socket Cliente aceptado.\n");
 	/*
 	* Se lee la informacion del cliente, suponiendo que va a enviar 
 	* 5 caracteres.
 	*/
-	Lee_Socket (Socket_Cliente, Cadena, 68);
+	Lee_Socket (Socket_Cliente, Cadena_lectura, 68);
 
 	/*
 	* Se escribe en pantalla la informacion que se ha recibido del
 	* cliente
 	*/
-	printf ("Soy Servior, he recibido : %s\n", Cadena);
+	printf ("Soy Servior, he recibido : %s\n", Cadena_lectura);
 
 	/*
-	* Se prepara una cadena de texto para enviar al cliente. La longitud
-	* de la cadena es 5 letras + \0 al final de la cadena = 6 caracteres
+	* Se prepara una Cadena_lectura de texto para enviar al cliente. La longitud
+	* de la Cadena_lectura es 5 letras + \0 al final de la Cadena_lectura = 6 caracteres
 	*/
-	strcpy (Cadena, "Adios");
+	strcpy (Cadena_lectura, "Adios");
 	FILE *filep;
 	if ((filep = fopen("server/catalog/sw6_trailer.txt", "r")) == NULL)
 	{
@@ -69,27 +69,41 @@ main ()
     	char line_transf[70]; 	//Frame trasmitido
     	int frameHeight = 13; 	//Altura del frame
     	int frameDuration = 0;	//Duracion en segundos del frame
+
 	while(!feof(filep)){
-	    	fgets(line, 100, filep);
-		printf("lee fila 1");
-	    	frameDuration= atoi(line);
-		printf("toma frames");
-	    	for (int i = 0; i < frameHeight ; ++i)
+		if (fgets(line, 100, filep)!=NULL)
 		{
+			frameDuration= atoi(line);
+			sprintf(line_transf, "%d\n",frameDuration);
+			printf("Se envian %ds\n",frameDuration);
+			Escribe_Socket (Socket_Cliente, line_transf, 70);	//Envia dato de segundos del frame
+		}
+		else
+		{
+			exit(1);
+		}
+		sleep(1);
+		/*Lee_Socket (Socket_Cliente, Cadena_lectura, 68);*/
+		for (int i = 0; i < frameHeight ; ++i)
+		{
+
 			if (fgets(line, 100, filep)!=NULL)
 			{
 				sprintf(line_transf, "%s\n",line);
 				printf("TRANSMITIENDO...%d\n",i);
 				Escribe_Socket (Socket_Cliente, line_transf, 70);
 			}
-		printf("Saliendo del for");
+			else
+			{
+				exit(1);
+			}
+			printf("Fin del for.\n");
 		}
 		printf("Al sleep");
-		sleep(frameDuration);
 		system("clear");
     }
 	
-	Escribe_Socket (Socket_Cliente, Cadena, 68);
+	Escribe_Socket (Socket_Cliente, Cadena_lectura, 68);
 
 	/*Preparar estructura para leer por cada fila del documento
 	* Son 13 filas por frame, y luego tiene que interpretar de la

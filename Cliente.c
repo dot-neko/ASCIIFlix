@@ -38,7 +38,7 @@ main ()
 	* Se prepara una cadena con 5 caracteres y se envia, 4 letras mas
 	* el \0 que indica fin de cadena en C
 	*/
-	strcpy (Cadena, "Hola desde Cliente");
+	strcpy (Cadena, "PLAY");
 	Escribe_Socket (Socket_Con_Servidor, Cadena, 68);
 
 	/*
@@ -50,7 +50,7 @@ main ()
 	do{
 		for (int i = 0; i < frameHeight; ++i)
 		{
-			printf("Leyendo del socket nro %d\n", i );
+			printf("Leyendo del socket frame nro %d\n", i );
 			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
 		}
 		/*system("clear");*/
