@@ -50,7 +50,7 @@ main ()
 	int frameDuration = 0;
 	do{
 		Lee_Socket (Socket_Con_Servidor, Cadena, 70);
-		frameDuration= atoi(line);
+		frameDuration= atoi(Cadena);
 		for (int i = 0; i < frameHeight; ++i)
 		{
 			printf("Leyendo del socket frame nro %d\n", i );
