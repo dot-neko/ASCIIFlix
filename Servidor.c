@@ -80,9 +80,12 @@ main ()
 		}
 		else
 		{
+			line_transf=NULL;
+			Escribe_Socket (Socket_Cliente, line_transf, 70);
 			exit(1);
 		}
 		sleep(1);
+		printf("TRANSMITIENDO...\n");
 		/*Lee_Socket (Socket_Cliente, Cadena_lectura, 68);*/
 		for (int i = 0; i < frameHeight ; ++i)
 		{
@@ -90,17 +93,17 @@ main ()
 			if (fgets(line, 100, filep)!=NULL)
 			{
 				sprintf(line_transf, "%s\n",line);
-				printf("TRANSMITIENDO...%d\n",i);
 				Escribe_Socket (Socket_Cliente, line_transf, 70);
 			}
 			else
 			{
+				line_transf=NULL;
+				Escribe_Socket (Socket_Cliente, line_transf, 70);
 				exit(1);
 			}
-			printf("Fin del for.\n");
 		}
 		printf("Al sleep");
-		sleep(frameDuration);
+		usleep((frameDuration+1)*100);;
     }
 	
 	Escribe_Socket (Socket_Cliente, Cadena_lectura, 68);
