@@ -56,7 +56,7 @@ main ()
 			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
 			printf ("%s\n", Cadena);
 		}
-		usleep((frameDuration+1)*100);
+		usleep((frameDuration+1)*1000);
 		system("clear");
 	} while(Cadena!=NULL);
 

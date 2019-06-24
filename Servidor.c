@@ -103,7 +103,7 @@ main ()
 			}
 		}
 		printf("Al sleep");
-		usleep((frameDuration+1)*100);;
+		usleep((frameDuration+1)*1000);;
     }
 	
 	Escribe_Socket (Socket_Cliente, Cadena_lectura, 68);
