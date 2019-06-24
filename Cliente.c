@@ -41,10 +41,6 @@ main ()
 	strcpy (Cadena, "PLAY");
 	Escribe_Socket (Socket_Con_Servidor, Cadena, 68);
 
-	/*
-	* Se lee la informacion enviada por el servidor, que se supone es
-	* una cadena de 6 caracteres.
-	*/
 	
 	int frameHeight = 13;
 	int frameDuration = 0;
@@ -56,16 +52,19 @@ main ()
 			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
 			printf ("%s\n", Cadena);
 		}
-		usleep((frameDuration+1)*1000);
+		sleep((frameDuration+1)/10);
 		system("clear");
-	} while(Cadena!=NULL);
+	} while(Cadena!="END");
 
-	/*
-	* Se escribe en pantalla la informacion recibida del servidor
-	*/
-
+	if(Cadena=="END")
+	{
+		printf ("SE TERMINO LA PELICULA\n");
+		exit(1);
+	}
+	
 	/*
 	* Se cierra el socket con el servidor
 	*/
 	close (Socket_Con_Servidor);
+
 }

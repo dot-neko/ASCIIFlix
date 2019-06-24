@@ -75,7 +75,7 @@ main ()
 		{
 			frameDuration= atoi(line);
 			sprintf(line_transf, "%d\n",frameDuration);
-			printf("Se envian %ds\n",frameDuration);
+			printf("Se envian %d\n",frameDuration);
 			Escribe_Socket (Socket_Cliente, line_transf, 70);	//Envia dato de segundos del frame
 		}
 		else
@@ -102,8 +102,7 @@ main ()
 				exit(1);
 			}
 		}
-		printf("Al sleep");
-		usleep((frameDuration+1)*1000);;
+		sleep((frameDuration+1)/10);
     }
 	
 	Escribe_Socket (Socket_Cliente, Cadena_lectura, 68);
