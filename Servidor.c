@@ -100,7 +100,7 @@ main ()
 			printf("Fin del for.\n");
 		}
 		printf("Al sleep");
-		system("clear");
+		sleep(frameDuration);
     }
 	
 	Escribe_Socket (Socket_Cliente, Cadena_lectura, 68);

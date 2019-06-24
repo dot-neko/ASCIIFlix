@@ -47,19 +47,23 @@ main ()
 	*/
 	
 	int frameHeight = 13;
+	int frameDuration = 0;
 	do{
+		Lee_Socket (Socket_Con_Servidor, Cadena, 70);
+		frameDuration= atoi(line);
 		for (int i = 0; i < frameHeight; ++i)
 		{
 			printf("Leyendo del socket frame nro %d\n", i );
 			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
+			printf ("%s\n", Cadena);
 		}
-		/*system("clear");*/
+		sleep(frameDuration);
+		system("clear");
 	} while (Cadena!=NULL);
 
 	/*
 	* Se escribe en pantalla la informacion recibida del servidor
 	*/
-	printf ("Soy cliente, He recibido : %s\n", Cadena);
 
 	/*
 	* Se cierra el socket con el servidor
