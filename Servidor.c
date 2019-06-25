@@ -79,6 +79,7 @@ main ()
 		}
 		else
 		{
+			printf("Error en frame\n");
 			sprintf(line,"END");
 			Escribe_Socket (Socket_Cliente, line, CHARS);
 			exit(1);
@@ -91,12 +92,12 @@ main ()
 
 			if (fgets(line, CHARS, filep)!=NULL)
 			{
-				sprintf(line_transf, "%s\n",line);
+				printf("L%d|%s\n", i+1, line);
 				Escribe_Socket (Socket_Cliente, line, CHARS);
 			}
 			else
 			{
-				line_transf[0]='\0';
+				sprintf(line,"END");
 				printf("Lei un null");
 				Escribe_Socket (Socket_Cliente, line, CHARS);
 				exit(1);
