@@ -44,6 +44,7 @@ main ()
 	
 	int frameHeight = 13;
 	int frameDuration = 0;
+	int moviePlay = 1;
 	do{
 		Lee_Socket (Socket_Con_Servidor, Cadena, CHARS);
 		frameDuration= atoi(Cadena);
@@ -54,14 +55,13 @@ main ()
 		}
 		sleep((frameDuration+1)/10);
 		system("clear");
-	} while(Cadena!=NULL);
+		if (frameDuration==0)
+		{
+			moviePlay=0;
+		}
+	} while(moviePlay);
 
-	if(Cadena==NULL)
-	{
-		printf ("SE TERMINO LA PELICULA\n");
-		exit(1);
-	}
-	
+	printf ("SE TERMINO LA PELICULA\n");
 	/*
 	* Se cierra el socket con el servidor
 	*/
