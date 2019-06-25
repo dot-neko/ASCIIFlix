@@ -87,7 +87,6 @@ main ()
 		}
 		sleep(1);
 		printf("TRANSMITIENDO...\n");
-		/*Lee_Socket (Socket_Cliente, Cadena_lectura, 68);*/
 		for (int i = 0; i < frameHeight ; ++i)
 		{
 
@@ -98,15 +97,13 @@ main ()
 			else
 			{
 				sprintf(line,"");
-				printf("Lei un null");
+				printf("Lei un null. Fin de transmision.\n");
 				Escribe_Socket (Socket_Cliente, line, CHARS);
 				exit(1);
 			}
 		}
 		sleep((frameDuration+1)/10);
     }
-
-
 
 	/*
 	* Se cierran los sockets
