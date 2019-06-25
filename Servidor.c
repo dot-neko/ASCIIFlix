@@ -54,10 +54,11 @@ main ()
 	*/
 	printf ("Soy Servior, he recibido : %s\n", Cadena_lectura);
 
-	/*
-	* Se prepara una Cadena_lectura de texto para enviar al cliente. La longitud
-	* de la Cadena_lectura es 5 letras + \0 al final de la Cadena_lectura = 6 caracteres
-	*/
+	/*Preparar estructura para leer por cada fila del documento
+	* Son 13 filas por frame, y luego tiene que interpretar de la
+	* primera linea los segundos que tiene que dejar estático el 
+	* frame completo*/
+
 	strcpy (Cadena_lectura, "Adios");
 	FILE *filep;
 	if ((filep = fopen("server/catalog/sw6_trailer.txt", "r")) == NULL)
@@ -80,7 +81,7 @@ main ()
 		else
 		{
 			printf("Error en frame\n");
-			sprintf(line,"END");
+			sprintf(line,"");
 			Escribe_Socket (Socket_Cliente, line, CHARS);
 			exit(1);
 		}
@@ -92,12 +93,11 @@ main ()
 
 			if (fgets(line, CHARS, filep)!=NULL)
 			{
-				printf("L%d|%s\n", i+1, line);
 				Escribe_Socket (Socket_Cliente, line, CHARS);
 			}
 			else
 			{
-				sprintf(line,"END");
+				sprintf(line,"");
 				printf("Lei un null");
 				Escribe_Socket (Socket_Cliente, line, CHARS);
 				exit(1);
@@ -105,13 +105,8 @@ main ()
 		}
 		sleep((frameDuration+1)/10);
     }
-	
-	Escribe_Socket (Socket_Cliente, Cadena_lectura, CHARS);
 
-	/*Preparar estructura para leer por cada fila del documento
-	* Son 13 filas por frame, y luego tiene que interpretar de la
-	* primera linea los segundos que tiene que dejar estático el 
-	* frame completo*/
+
 
 	/*
 	* Se cierran los sockets

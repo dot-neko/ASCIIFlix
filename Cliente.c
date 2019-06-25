@@ -54,9 +54,9 @@ main ()
 		}
 		sleep((frameDuration+1)/10);
 		system("clear");
-	} while(Cadena!="END");
+	} while(Cadena!=NULL);
 
-	if(Cadena=="END")
+	if(Cadena==NULL)
 	{
 		printf ("SE TERMINO LA PELICULA\n");
 		exit(1);
