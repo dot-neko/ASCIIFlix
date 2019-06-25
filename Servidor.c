@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-
+#define CHARS 100
 main ()
 {
 	/*
@@ -65,23 +65,22 @@ main ()
 		printf("No se pudo abrir el archivo");
 		exit(1);
 	}
-    	char line[68]; 		//Ancho máximo del frame
-    	char line_transf[70]; 	//Frame trasmitido
+    	char line[CHARS]; 		//Ancho máximo del frame
+    	char line_transf[CHARS]; 	//Frame trasmitido
     	int frameHeight = 13; 	//Altura del frame
     	int frameDuration = 0;	//Duracion en segundos del frame
 
 	while(!feof(filep)){
-		if (fgets(line, 67, filep)!=NULL)
+		if (fgets(line, CHARS, filep)!=NULL)
 		{
 			frameDuration= atoi(line);
-			sprintf(line_transf, "%d\n",frameDuration);
 			printf("Se envian %d\n",frameDuration);
-			Escribe_Socket (Socket_Cliente, line_transf, 70);	//Envia dato de segundos del frame
+			Escribe_Socket (Socket_Cliente, line, CHARS);	//Envia dato de segundos del frame
 		}
 		else
 		{
-			line_transf[0]='\0';
-			Escribe_Socket (Socket_Cliente, line_transf, 70);
+			sprintf(line,"END");
+			Escribe_Socket (Socket_Cliente, line, CHARS);
 			exit(1);
 		}
 		sleep(1);
@@ -90,22 +89,23 @@ main ()
 		for (int i = 0; i < frameHeight ; ++i)
 		{
 
-			if (fgets(line, 67, filep)!=NULL)
+			if (fgets(line, CHARS, filep)!=NULL)
 			{
 				sprintf(line_transf, "%s\n",line);
-				Escribe_Socket (Socket_Cliente, line_transf, 70);
+				Escribe_Socket (Socket_Cliente, line, CHARS);
 			}
 			else
 			{
 				line_transf[0]='\0';
-				Escribe_Socket (Socket_Cliente, line_transf, 70);
+				printf("Lei un null");
+				Escribe_Socket (Socket_Cliente, line, CHARS);
 				exit(1);
 			}
 		}
 		sleep((frameDuration+1)/10);
     }
 	
-	Escribe_Socket (Socket_Cliente, Cadena_lectura, 68);
+	Escribe_Socket (Socket_Cliente, Cadena_lectura, CHARS);
 
 	/*Preparar estructura para leer por cada fila del documento
 	* Son 13 filas por frame, y luego tiene que interpretar de la
