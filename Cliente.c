@@ -11,7 +11,7 @@
 
 #include <Socket_Cliente.h>
 #include <Socket.h>
-
+#define CHARS 100
 main ()
 {
 	/*
@@ -39,17 +39,17 @@ main ()
 	* el \0 que indica fin de cadena en C
 	*/
 	strcpy (Cadena, "PLAY");
-	Escribe_Socket (Socket_Con_Servidor, Cadena, 68);
+	Escribe_Socket (Socket_Con_Servidor, Cadena, CHARS);
 
 	
 	int frameHeight = 13;
 	int frameDuration = 0;
 	do{
-		Lee_Socket (Socket_Con_Servidor, Cadena, 70);
+		Lee_Socket (Socket_Con_Servidor, Cadena, CHARS);
 		frameDuration= atoi(Cadena);
 		for (int i = 0; i < frameHeight; ++i)
 		{
-			Lee_Socket (Socket_Con_Servidor, Cadena, 70);
+			Lee_Socket (Socket_Con_Servidor, Cadena, CHARS);
 			printf ("%s\n", Cadena);
 		}
 		sleep((frameDuration+1)/10);
