@@ -46,6 +46,7 @@ int main (int argc, char *argv[])
 	Escribe_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 
 	do{
+		system("clear");
 		Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 		frameDuration= atoi(cadena_multiuso);
 		for (int i = 0; i < frameHeight; ++i)
@@ -53,8 +54,7 @@ int main (int argc, char *argv[])
 			Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 			printf ("%s\n", cadena_multiuso);
 		}
-		sleep((frameDuration+1)/10);
-		system("clear");
+		sleep((frameDuration+2)/10);
 		if (frameDuration==0)
 		{
 			moviePlay=0;
