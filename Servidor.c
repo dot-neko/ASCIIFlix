@@ -91,7 +91,6 @@ main ()
 			Escribe_Socket (Socket_Cliente, line, CHARS);
 			exit(1);
 		}
-		sleep(1);
 		printf("TRANSMITIENDO...\n");
 		for (int i = 0; i < frameHeight ; ++i)
 		{
@@ -108,7 +107,7 @@ main ()
 				exit(1);
 			}
 		}
-		sleep((frameDuration+1)/10);
+		/*sleep((frameDuration+1)/10);*/
     }
 
 	/*
