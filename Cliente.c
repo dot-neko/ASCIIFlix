@@ -59,7 +59,7 @@ int main (int argc, char *argv[])
 		system("clear");
 		for (int i = 0; i < frameHeight; ++i)
 		{
-			printf ("%s\n", ch_arr[i][100]);
+			printf ("%s\n", ch_arr+i);
 		}
 		sleep((frameDuration+6)/10);
 		if (frameDuration==0)
