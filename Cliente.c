@@ -1,9 +1,3 @@
-/*
-* Javier Abellan, 20 Jun 2000
-*
-* Programa Cliente de un socket INET, como ejemplo de utilizacion
-* de las funciones de sockets
-*/
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -41,23 +35,31 @@ int main (int argc, char *argv[])
 		printf ("No puedo establecer conexion con el servidor\n");
 		exit (-1);
 	}
-	/*Envio peticion al servidor*/
+	/*Envio peticion al servidor según parámetros*/
 	strcpy (cadena_multiuso, argv[1]);
 	Escribe_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 
 	do{
+
+		//Lee la primera línea del frame. Toma info de duración en pantalla
 		Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 		frameDuration= atoi(cadena_multiuso);
+
+		//Carga los datos del socket en un buffer intermedio
 		for (int i = 0; i < frameHeight; ++i)
 		{
 			Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 			strcpy(ch_arr[i], cadena_multiuso);
 		}
 		system("clear");
+
+		//Imprime el buffer en pantalla. Esto optimiza la visualización final.
 		for (int i = 0; i < frameHeight; ++i)
 		{
 			printf ("%s\n", ch_arr+i);
 		}
+		
+		//Mantiene en pantalla el tiempo necesario la impresión
 		sleep((frameDuration+6)/10);
 		if (frameDuration==0)
 		{

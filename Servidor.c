@@ -1,9 +1,3 @@
-/*
-* Javier Abellan, 20 Jun 2000
-*
-* Programa Servidor de socket INET, como ejemplo de utilizacion de las
-* funciones de sockets.
-*/
 #include <Socket_Servidor.h>
 #include <Socket.h>
 #include <string.h>
@@ -24,7 +18,6 @@ main ()
 	char cadena_recibida[100];
 	char movie_path[100];
 	char line[CHARS]; 				//Ancho máximo del frame
-	char line_transf[CHARS]; 		//Frame trasmitido
 	int frameHeight = FRAMEHEIGHT; 	//Altura del frame
 	float frameDuration = 0.0f;		//Duracion en segundos del frame
 	/*
@@ -58,10 +51,10 @@ main ()
 	* Se escribe en pantalla la informacion que se ha recibido del
 	* cliente
 	*/
-	printf ("Soy Servior, he recibido : %s\n", cadena_recibida);
+	printf ("Soy Servidor, he recibido : %s\n", cadena_recibida);
 
 	
-
+	//Busca la película solicitada
 	sprintf(movie_path,"server/catalog/%s.txt",cadena_recibida);
 	FILE *filep;
 	if ((filep = fopen(movie_path, "r")) == NULL)
@@ -71,21 +64,23 @@ main ()
 		Escribe_Socket (Socket_Cliente, line, CHARS);
 		exit(1);
 	}
-	/*Preparar estructura para leer por cada fila del documento
-	* Son 13 filas por frame, y luego tiene que interpretar de la
-	* primera linea los segundos que tiene que dejar estático el 
-	* frame completo*/
-
+	/*
+	* Preparar estructura para leer por cada fila del documento.
+	* Son 13 filas por frame, más la primer fila contiene datos 
+	* de los segundos que tiene que dejar estático el frame completo
+	*/
 
 	while(!feof(filep)){
 		if (fgets(line, CHARS, filep)!=NULL)
 		{
+			//Toma y envia dato de segundos del frame
 			frameDuration= atoi(line)* TIME_MULTIPLIER;
 			printf("Se envian %4.2f\n",frameDuration);
-			Escribe_Socket (Socket_Cliente, line, CHARS);	//Envia dato de segundos del frame
+			Escribe_Socket (Socket_Cliente, line, CHARS);	
 		}
 		else
 		{
+			//Si hay un error en el frame, sale del proceso.
 			printf("Error en frame\n");
 			sprintf(line,"");
 			Escribe_Socket (Socket_Cliente, line, CHARS);
@@ -94,7 +89,7 @@ main ()
 		printf("TRANSMITIENDO...\n");
 		for (int i = 0; i < frameHeight ; ++i)
 		{
-
+			//Envía el frame completo por partes
 			if (fgets(line, CHARS, filep)!=NULL)
 			{
 				Escribe_Socket (Socket_Cliente, line, CHARS);
@@ -102,12 +97,12 @@ main ()
 			else
 			{
 				sprintf(line,"");
-				printf("Lei un null. Fin de transmision.\n");
+				printf("Fin de transmision.\n");
 				Escribe_Socket (Socket_Cliente, line, CHARS);
 				exit(1);
 			}
 		}
-		//Espera para transmitir de vuelta para no generar un overflow del lado del cliente.
+		//Espera para transmitir nuevos frames para no generar un overflow del lado del cliente.
 		sleep((frameDuration+6)/10);
     }
 
