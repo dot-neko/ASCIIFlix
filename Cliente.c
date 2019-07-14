@@ -20,9 +20,7 @@ int main (int argc, char *argv[])
 		printf("Ha olvidado ingresar una película.\n"); 
 		exit(1);
 	}
-	/*
-	* Descriptor del socket y buffer para datos
-	*/
+
 	int Socket_Con_Servidor;
 	char cadena_multiuso[CHARS];
 	char ch_arr[FRAMEHEIGHT][CHARS]={"","","","","","","","","","","","",""};
