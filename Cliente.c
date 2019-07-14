@@ -13,8 +13,8 @@
 #include <Socket.h>
 #define CHARS 100
 #define FRAMEHEIGHT 13
-main (int argc, char *argv[])
-	
+int main (int argc, char *argv[])
+{
 	if(argc!=2) 
 	{
 		printf("Ha olvidado ingresar una película.\n"); 
