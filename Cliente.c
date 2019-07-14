@@ -48,7 +48,6 @@ int main (int argc, char *argv[])
 	Escribe_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 
 	do{
-		printf("Ha olvidado ingresar una película.\n"); 
 		Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 		frameDuration= atoi(cadena_multiuso);
 		for (int i = 0; i < frameHeight; ++i)
