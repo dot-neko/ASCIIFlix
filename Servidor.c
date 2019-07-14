@@ -107,7 +107,7 @@ main ()
 				exit(1);
 			}
 		}
-		/*sleep((frameDuration+1)/10);*/
+		sleep((frameDuration+2)/10);
     }
 
 	/*
