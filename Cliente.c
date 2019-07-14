@@ -25,7 +25,7 @@ int main (int argc, char *argv[])
 	*/
 	int Socket_Con_Servidor;
 	char cadena_multiuso[CHARS];
-	char ch_arr[13][100]={"","","","","","","","","","","","",""};
+	char ch_arr[12][100]={"","","","","","","","","","","","",""};
 	printf("Ha olvidado ingresar una película.\n"); 
 	int frameHeight = FRAMEHEIGHT;
 	float frameDuration = 0.0f;
