@@ -24,8 +24,9 @@ int main (int argc, char *argv[])
 	* Descriptor del socket y buffer para datos
 	*/
 	int Socket_Con_Servidor;
-	char cadena_multiuso[100];
-	char ch_arr[FRAMEHEIGHT][100];
+	char cadena_multiuso[CHARS];
+	char ch_arr[13][100];
+	printf("Ha olvidado ingresar una película.\n"); 
 	int frameHeight = FRAMEHEIGHT;
 	float frameDuration = 0.0f;
 	int moviePlay = 1;
