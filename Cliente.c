@@ -25,6 +25,7 @@ int main (int argc, char *argv[])
 	*/
 	int Socket_Con_Servidor;
 	char cadena_multiuso[100];
+	char ch_arr[FRAMEHEIGHT][100];
 	int frameHeight = FRAMEHEIGHT;
 	float frameDuration = 0.0f;
 	int moviePlay = 1;
@@ -46,15 +47,20 @@ int main (int argc, char *argv[])
 	Escribe_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 
 	do{
-		system("clear");
+		
 		Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 		frameDuration= atoi(cadena_multiuso);
 		for (int i = 0; i < frameHeight; ++i)
 		{
 			Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
-			printf ("%s\n", cadena_multiuso);
+			strcpy(ch_arr[i], cadena_multiuso);
 		}
-		sleep((frameDuration+10)/10);
+		system("clear");
+		for (int i = 0; i < frameHeight; ++i)
+		{
+			printf ("%s\n", ch_arr[i][100]);
+		}
+		sleep((frameDuration+6)/10);
 		if (frameDuration==0)
 		{
 			moviePlay=0;

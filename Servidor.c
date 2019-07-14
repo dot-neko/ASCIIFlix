@@ -107,7 +107,8 @@ main ()
 				exit(1);
 			}
 		}
-		sleep((frameDuration+10)/10);
+		//Espera para transmitir de vuelta para no generar un overflow del lado del cliente.
+		sleep((frameDuration+6)/10);
     }
 
 	/*
