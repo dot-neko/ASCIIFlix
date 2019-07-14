@@ -54,7 +54,7 @@ int main (int argc, char *argv[])
 			Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 			printf ("%s\n", cadena_multiuso);
 		}
-		sleep((frameDuration+2)/10);
+		sleep((frameDuration+10)/10);
 		if (frameDuration==0)
 		{
 			moviePlay=0;
