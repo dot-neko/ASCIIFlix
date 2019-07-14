@@ -12,6 +12,8 @@
 #include <unistd.h>
 #include <time.h>
 #define CHARS 100
+#define FRAMEHEIGHT 13
+#define TIME_MULTIPLIER 1.3
 main ()
 {
 	/*
@@ -19,8 +21,12 @@ main ()
 	*/
 	int Socket_Servidor;
 	int Socket_Cliente;
-	char Cadena_lectura[100];
-
+	char cadena_recibida[100];
+	char movie_path[100];
+	char line[CHARS]; 				//Ancho máximo del frame
+	char line_transf[CHARS]; 		//Frame trasmitido
+	int frameHeight = FRAMEHEIGHT; 	//Altura del frame
+	float frameDuration = 0.0f;		//Duracion en segundos del frame
 	/*
 	* Se abre el socket servidor, con el servicio "cpp_java" dado de
 	* alta en /etc/services.
@@ -46,36 +52,36 @@ main ()
 	* Se lee la informacion del cliente, suponiendo que va a enviar 
 	* 5 caracteres.
 	*/
-	Lee_Socket (Socket_Cliente, Cadena_lectura, 68);
+	Lee_Socket (Socket_Cliente, cadena_recibida, 68);
 
 	/*
 	* Se escribe en pantalla la informacion que se ha recibido del
 	* cliente
 	*/
-	printf ("Soy Servior, he recibido : %s\n", Cadena_lectura);
+	printf ("Soy Servior, he recibido : %s\n", cadena_recibida);
 
+	
+
+	sprintf(movie_path,"server/catalog/%s.txt",cadena_recibida);
+	FILE *filep;
+	if ((filep = fopen(movie_path, "r")) == NULL)
+	{
+		printf("No se pudo encontrar la película solicitada.\n");
+		sprintf(line,"");
+		Escribe_Socket (Socket_Cliente, line, CHARS);
+		exit(1);
+	}
 	/*Preparar estructura para leer por cada fila del documento
 	* Son 13 filas por frame, y luego tiene que interpretar de la
 	* primera linea los segundos que tiene que dejar estático el 
 	* frame completo*/
 
-	strcpy (Cadena_lectura, "Adios");
-	FILE *filep;
-	if ((filep = fopen("server/catalog/sw6_trailer.txt", "r")) == NULL)
-	{
-		printf("No se pudo abrir el archivo");
-		exit(1);
-	}
-    	char line[CHARS]; 		//Ancho máximo del frame
-    	char line_transf[CHARS]; 	//Frame trasmitido
-    	int frameHeight = 13; 	//Altura del frame
-    	int frameDuration = 0;	//Duracion en segundos del frame
 
 	while(!feof(filep)){
 		if (fgets(line, CHARS, filep)!=NULL)
 		{
-			frameDuration= atoi(line);
-			printf("Se envian %d\n",frameDuration);
+			frameDuration= atoi(line)* TIME_MULTIPLIER;
+			printf("Se envian %4.2f\n",frameDuration);
 			Escribe_Socket (Socket_Cliente, line, CHARS);	//Envia dato de segundos del frame
 		}
 		else

@@ -12,14 +12,22 @@
 #include <Socket_Cliente.h>
 #include <Socket.h>
 #define CHARS 100
-main ()
-{
+#define FRAMEHEIGHT 13
+main (int argc, char *argv[])
+	
+	if(argc!=2) 
+	{
+		printf("Ha olvidado ingresar una película.\n"); 
+		exit(1);
+	}
 	/*
 	* Descriptor del socket y buffer para datos
 	*/
 	int Socket_Con_Servidor;
-	char Cadena[100];
-
+	char cadena_multiuso[100];
+	int frameHeight = FRAMEHEIGHT;
+	float frameDuration = 0.0f;
+	int moviePlay = 1;
 	/*
 	* Se abre la conexion con el servidor, pasando el nombre del ordenador
 	* y el servicio solicitado.
@@ -33,25 +41,17 @@ main ()
 		printf ("No puedo establecer conexion con el servidor\n");
 		exit (-1);
 	}
+	/*Envio peticion al servidor*/
+	strcpy (cadena_multiuso, argv[1]);
+	Escribe_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
 
-	/*
-	* Se prepara una cadena con 5 caracteres y se envia, 4 letras mas
-	* el \0 que indica fin de cadena en C
-	*/
-	strcpy (Cadena, "PLAY");
-	Escribe_Socket (Socket_Con_Servidor, Cadena, CHARS);
-
-	
-	int frameHeight = 13;
-	int frameDuration = 0;
-	int moviePlay = 1;
 	do{
-		Lee_Socket (Socket_Con_Servidor, Cadena, CHARS);
-		frameDuration= atoi(Cadena);
+		Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
+		frameDuration= atoi(cadena_multiuso);
 		for (int i = 0; i < frameHeight; ++i)
 		{
-			Lee_Socket (Socket_Con_Servidor, Cadena, CHARS);
-			printf ("%s\n", Cadena);
+			Lee_Socket (Socket_Con_Servidor, cadena_multiuso, CHARS);
+			printf ("%s\n", cadena_multiuso);
 		}
 		sleep((frameDuration+1)/10);
 		system("clear");
