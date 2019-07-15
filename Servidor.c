@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <signal.h>
 #define CHARS 100
 #define FRAMEHEIGHT 13
 #define TIME_MULTIPLIER 1.3
