@@ -5,11 +5,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-#include <signal.h>
 #define CHARS 100
 #define FRAMEHEIGHT 13
 #define TIME_MULTIPLIER 1.3
-void handler(int signum);
 
 int main ()
 {
@@ -27,7 +25,6 @@ int main ()
 	* Se abre el socket servidor, con el servicio "cpp_java" dado de
 	* alta en /etc/services.
 	*/
-	signal(SIGINT,handler);
 	Socket_Servidor = Abre_Socket_Inet ("cpp_java");
 	if (Socket_Servidor == -1)
 	{
@@ -113,13 +110,6 @@ int main ()
 	/*
 	* Se cierran los sockets
 	*/
-	close (Socket_Cliente);
-	close (Socket_Servidor);
-}
-
-
-void handler (int signum){
-	printf("\nRecibi la señal sigint\n");
 	close (Socket_Cliente);
 	close (Socket_Servidor);
 }

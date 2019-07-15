@@ -2,14 +2,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <signal.h>
 
 #include <Socket_Cliente.h>
 #include <Socket.h>
 #define CHARS 100
 #define FRAMEHEIGHT 13
-
-void handler(int signum);
 
 int main (int argc, char *argv[])
 {
@@ -26,7 +23,6 @@ int main (int argc, char *argv[])
 	int frameHeight = FRAMEHEIGHT;
 	float frameDuration = 0.0f;
 	int moviePlay = 1;
-	signal(SIGINT,handler);
 	/*
 	* Se abre la conexion con el servidor, pasando el nombre del ordenador
 	* y el servicio solicitado.
@@ -79,9 +75,3 @@ int main (int argc, char *argv[])
 	close (Socket_Con_Servidor);
 
 }
-
-void handler (int signum){
-	printf("\nRecibi la señal sigint\n");
-	close(Socket_Con_Servidor);
-}
-
