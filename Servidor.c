@@ -10,7 +10,8 @@
 #define FRAMEHEIGHT 13
 #define TIME_MULTIPLIER 1.3
 void handler(int signum);
-main ()
+
+int main ()
 {
 	/*
 	* Descriptores de socket servidor y de socket con el cliente
